@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kingdom of Kings | DeadCode Studios</title>
+<meta name="description" content="DeadCode Studios is a small team of friends making games in Unity. Kingdom of Kings: only one wears the crown.">
+
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Grenze:ital,wght@0,600;0,700;0,800;1,400&family=Grenze+Gotisch:wght@700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0a0908}
+a{color:#f4a35c}a:hover{color:#ffc38a}
+.parch a{color:#7a3612}.parch a:hover{color:#4d2209}
+:focus-visible{outline:2px solid #e07b2e;outline-offset:3px}
+.parch :focus-visible{outline-color:#7a3612}
+.skip{position:absolute;left:-9999px;top:12px;z-index:20}
+.skip:focus{left:16px}
+.nav-link{display:inline-flex;align-items:center;min-height:44px;color:#e8e0d0;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav-link:hover{color:#f4a35c}
+.foot-link{display:inline-flex;align-items:center;min-height:36px;color:#e8e0d0;text-decoration:none;font-size:18px}
+.foot-link:hover{color:#f4a35c}
+.h2{margin:0;font-family:'Grenze',Georgia,serif;font-weight:700;font-size:clamp(2rem,1.25rem + 2.5vw,3.25rem);line-height:1.05;letter-spacing:.04em;text-transform:uppercase}
+.h3{margin:0;font-family:'Grenze',Georgia,serif;font-weight:700;font-size:clamp(1.75rem,1.1rem + 1.4vw,2.5rem);line-height:1.1;letter-spacing:.01em}
+.lbl{margin:0;font-family:'Grenze',Georgia,serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
+.rule{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-bottom:16px;border-bottom:6px double #121110}
+.tag{display:inline-flex;align-items:center;gap:8px;min-height:30px;padding:0 12px;background:#121110;color:#e8e0d0;font-family:'Grenze',Georgia,serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.tagd{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border:2px dashed #121110;color:#121110;font-family:'Grenze',Georgia,serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.dot{display:inline-block;width:7px;height:7px;background:#e07b2e}
+.arrow{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ph{padding:5px 9px;background:#121110;color:#e8e0d0;font-family:'Grenze',Georgia,serif;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.dl-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:2px dashed #6b6258}
+.dl-row:last-child{border-bottom:0}
+.dl-row dt{font-family:'Grenze',Georgia,serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#4a443d;align-self:center}
+.dl-row dd{margin:0;font-size:18px;text-align:right}
+.cta{transition:box-shadow .2s ease-out,background-color .2s ease-out,border-color .2s ease-out}
+.cta:hover,.cta:focus-visible{background-color:#f4a35c!important;border-color:#f4a35c!important;box-shadow:0 0 28px rgba(244,163,92,.45)}
+.ghost{transition:border-color .2s ease-out}
+.ghost:hover,.ghost:focus-visible{border-color:#e8e0d0!important}
+.ink-btn{transition:background-color .2s ease-out,border-color .2s ease-out}
+.ink-btn:hover,.ink-btn:focus-visible{background-color:#7a3612!important;border-color:#7a3612!important}
+.card{transition:border-color .2s ease-out}
+.card:hover,.card:focus-visible{border-color:#7a3612!important}
+.row-link:hover .row-title{color:#7a3612}
+.plate{position:relative;background:rgba(18,17,16,.94);border:1px solid #34302b;border-top:6px solid #24211e}
+.plate::before{content:"";position:absolute;inset:14px;pointer-events:none;background:linear-gradient(#4a443d,#4a443d) left top/8px 8px no-repeat,linear-gradient(#4a443d,#4a443d) right top/8px 8px no-repeat,linear-gradient(#4a443d,#4a443d) left bottom/8px 8px no-repeat,linear-gradient(#4a443d,#4a443d) right bottom/8px 8px no-repeat}
+.wm{position:relative;display:inline-block;white-space:nowrap}
+.wm-back{position:absolute;left:0;top:0;color:#5e4e3f;text-shadow:1px 1px 0 #5e4e3f,2px 2px 0 #5a4a3c,3px 3px 0 #50423a,4px 4px 0 #43372e,5px 5px 0 #342b24,6px 6px 0 #231d19,8px 8px 0 #161210,10px 18px 36px rgba(0,0,0,.6);user-select:none}
+.wm-front{position:relative;color:#e4dac8;background:linear-gradient(180deg,#fff8ec 10%,#bdb19d 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.field{transition:box-shadow .15s ease-out,border-color .15s ease-out}
+.field:focus,.field:focus-visible{outline:none;border-color:#e07b2e!important;box-shadow:0 0 0 4px rgba(224,123,46,.18)}
+summary::-webkit-details-marker{display:none}
+summary{list-style:none}
+.chev{transition:transform .2s ease-out}
+details[open] .chev{transform:rotate(180deg)}
+@media (prefers-reduced-motion: no-preference){
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}.d4{animation-delay:.32s}
+.flicker{animation:flicker 7s ease-in-out infinite}
+}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes flicker{0%,100%{opacity:.82}18%{opacity:1}34%{opacity:.88}52%{opacity:.97}71%{opacity:.84}}
+input::placeholder{color:#8f8679}
+</style>
+
+<style>
+[data-if]{display:contents}
+[data-if][hidden]{display:none}
+body.paused .flicker{animation-play-state:paused!important}
+</style>
+</head>
+<body>
+
+
+<div style="position:relative;overflow-x:hidden;font-family:'Alegreya Sans','Gill Sans','Trebuchet MS',system-ui,sans-serif;font-size:18px;line-height:1.45;color:#e8e0d0;background:#0a0908;-webkit-font-smoothing:antialiased">
+<a class="skip" href="#main" style="padding:12px 18px;background:#e8e0d0;color:#0a0908;font-weight:700;text-decoration:none">Skip to content</a>
+
+<header style="position:absolute;top:0;left:0;right:0;z-index:5">
+<div style="width:100%;max-width:1240px;margin:0 auto;padding:24px clamp(16px,4vw,64px);box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px">
+<a href="index.html" aria-label="DeadCode Studios, home" style="display:inline-flex;align-items:center;gap:12px;min-height:44px;color:#e8e0d0;text-decoration:none">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="2" y="2" width="24" height="24" stroke="#e8e0d0" stroke-width="2.5"></rect><path d="M11 20l4-12" stroke="#e07b2e" stroke-width="2.5" stroke-linecap="square"></path><path d="M16 20l4-12" stroke="#e07b2e" stroke-width="2.5" stroke-linecap="square"></path></svg>
+<span style="font-family:'Grenze Gotisch','Old English Text MT',Georgia,serif;font-size:28px;font-weight:800;line-height:1">DeadCode Studios</span>
+</a>
+<nav aria-label="Main" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 28px">
+<a class="nav-link" href="index.html" aria-current="page" style="text-decoration:underline;text-decoration-color:#e07b2e;text-decoration-thickness:2px;text-underline-offset:8px">Games</a>
+<a class="nav-link" href="index.html">Devlog</a>
+<a class="nav-link" href="#press">Press</a>
+<a class="nav-link" href="index.html">About</a>
+<a class="nav-link" href="#">Collaborate</a>
+<a class="nav-link" href="#">Contact</a>
+</nav>
+<a class="cta" href="https://store.steampowered.com/app/APPID/?utm_source=studiosite&utm_medium=web&utm_campaign=coming_soon&utm_content=header" style="display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Wishlist on Steam</a>
+</div>
+</header>
+
+<main id="main">
+
+<section aria-labelledby="game-title" style="position:relative;overflow:hidden;background:#0a0908;min-height:820px;display:flex;flex-direction:column">
+<div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none">
+<div class="flicker" style="position:absolute;left:50%;bottom:-30%;width:min(1500px,190vw);aspect-ratio:2/1;transform:translateX(-50%);background:radial-gradient(ellipse at 50% 50%,rgba(224,123,46,.5) 0%,rgba(122,54,18,.28) 32%,rgba(10,9,8,0) 66%);animation-play-state:running"></div>
+<div style="position:absolute;left:50%;top:110px;bottom:0;width:min(640px,90vw);transform:translateX(-50%);border:2px solid rgba(232,224,208,.16);border-bottom:0;border-radius:999px 999px 0 0"></div>
+<div style="position:absolute;left:50%;top:150px;bottom:0;width:min(560px,80vw);transform:translateX(-50%);border:2px solid rgba(232,224,208,.24);border-bottom:0;border-radius:999px 999px 0 0"></div>
+<div class="flicker" style="position:absolute;left:50%;top:200px;bottom:0;width:min(470px,70vw);transform:translateX(-50%);border:2px solid #7a3612;border-bottom:0;border-radius:999px 999px 0 0;background:linear-gradient(0deg,rgba(244,163,92,.5) 0%,rgba(224,123,46,.2) 46%,rgba(10,9,8,0) 100%);box-shadow:inset 0 0 80px rgba(224,123,46,.28);animation-play-state:running"></div>
+<div style="position:absolute;left:0;right:0;bottom:96px;height:2px;background:linear-gradient(90deg,rgba(224,123,46,0),rgba(224,123,46,.65),rgba(224,123,46,0))"></div>
+<svg width="100%" height="100%" style="position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay"><filter id="grain-game-hero"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#grain-game-hero)"></rect></svg>
+</div>
+
+<div style="position:relative;z-index:1;flex:1 1 auto;width:100%;max-width:1240px;margin:0 auto;padding:clamp(150px,14vw,168px) clamp(16px,4vw,64px) 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:40px">
+<nav aria-label="Breadcrumb">
+<ol class="lbl" style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+<li><a href="index.html" style="color:#b8ae9c;text-decoration:none">Games</a></li>
+<li aria-hidden="true" style="color:#6b6258">/</li>
+<li aria-current="page" style="color:#e8e0d0">Kingdom of Kings</li>
+</ol>
+</nav>
+
+<div style="margin:auto 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px">
+<p class="rise lbl" style="margin:0;display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;min-height:36px;padding:4px 14px;box-sizing:border-box;border:1px solid #6b6258;background:rgba(18,17,16,.9);color:#e8e0d0">
+<span class="dot" aria-hidden="true"></span>
+<span>Wishlist on Steam</span>
+<span aria-hidden="true" style="color:#6b6258">/</span>
+<span style="color:#b8ae9c">[Release window]</span>
+</p>
+<h1 id="game-title" class="rise d1" style="margin:0;display:flex;flex-direction:column;align-items:center;font-family:'Grenze Gotisch','Old English Text MT',Georgia,serif;font-weight:800;line-height:.9">
+<span class="wm" style="font-size:clamp(3.75rem,1rem + 8vw,9.5rem)"><span class="wm-back" aria-hidden="true">Kingdom</span><span class="wm-front">Kingdom</span></span>
+<span class="wm" style="font-size:clamp(3.75rem,1rem + 8vw,9.5rem)"><span class="wm-back" aria-hidden="true">of Kings</span><span class="wm-front">of Kings</span></span>
+</h1>
+<p class="rise d2" style="margin:0;max-width:560px;font-size:clamp(20px,1rem + .5vw,24px);line-height:1.45;color:#e8e0d0;text-wrap:pretty">[Tagline: one line that sells the fantasy of playing it.]</p>
+<div class="rise d3" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 20px">
+<a class="cta" href="https://store.steampowered.com/app/APPID/?utm_source=studiosite&utm_medium=web&utm_campaign=coming_soon&utm_content=game_hero" style="display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 28px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Wishlist on Steam<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 2l8 7-8 7"></path></svg></a>
+<a class="ghost" href="#trailer" style="display:inline-flex;align-items:center;min-height:56px;padding:0 24px;border:2px solid #6b6258;color:#e8e0d0;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:17px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Watch the trailer</a>
+<a href="#" style="display:inline-flex;align-items:center;min-height:44px;color:#b8ae9c;font-size:18px;text-decoration:underline;text-underline-offset:4px">Also on itch.io</a>
+</div>
+<p class="rise d4 lbl" style="margin:0;color:#b8ae9c">PC (Windows) · Steam · itch.io</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 16px">
+<p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;max-width:540px;padding:10px 14px;border:1px dashed #6b6258;background:rgba(18,17,16,.9);color:#b8ae9c;font-size:16px;line-height:1.4">
+<span class="lbl" style="color:#e8e0d0">Key art</span>
+<span>Placeholder. Use the same text-free art as the Steam Library Hero, with the focal point behind the logo.</span>
+</p>
+<button class="ghost" type="button" data-action="toggle-motion" style="display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 18px;border:2px solid #6b6258;background:rgba(18,17,16,.9);color:#e8e0d0;font-family:'Grenze',Georgia,serif;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer">
+<span data-if="playing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M9 5v14"></path><path d="M15 5v14"></path></svg></span>
+<span data-if="paused" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="miter" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span>
+<span data-motion-label>Pause motion</span>
+</button>
+</div>
+</div>
+</section>
+
+<section id="trailer" aria-labelledby="trailer-title" style="position:relative;z-index:3">
+<div style="width:100%;max-width:1240px;margin:0 auto;padding:16px clamp(16px,4vw,64px) 0;box-sizing:border-box">
+<div style="max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 24px">
+<h2 id="trailer-title" class="lbl" style="color:#e8e0d0">Trailer · [Length]</h2>
+<p style="margin:0;color:#b8ae9c;font-size:16px;line-height:1.4">YouTube loads only when you press play.</p>
+</div>
+<div style="position:relative;aspect-ratio:16/9;border:3px solid #6b6258;overflow:hidden;background:#1a1816;display:flex;align-items:center;justify-content:center;box-shadow:0 24px 60px rgba(0,0,0,.55)">
+<button class="cta" type="button" aria-label="Play the Kingdom of Kings trailer (loads YouTube)" style="width:96px;height:96px;padding:0;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></button>
+<p class="ph" style="position:absolute;left:14px;bottom:14px;margin:0">Poster frame · open on real gameplay</p>
+</div>
+</div>
+</div>
+</section>
+
+<div style="position:relative;z-index:2;margin-top:calc(-1 * clamp(96px,14vw,220px))">
+<div aria-hidden="true" style="height:28px;margin-bottom:-1px;background:repeating-linear-gradient(90deg,#D2CDB7 0,#D2CDB7 56px,transparent 56px,transparent 112px)"></div>
+<div class="parch" style="background:#D2CDB7;color:#121110;padding:calc(clamp(96px,14vw,220px) + clamp(48px,6vw,88px)) 0 clamp(80px,8vw,128px)">
+<div style="width:100%;max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(80px,9vw,128px)">
+
+<section id="about-game" aria-labelledby="about-game-title" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:48px 64px">
+<div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:24px">
+<p class="lbl" style="color:#4a443d">About the game</p>
+<h2 id="about-game-title" style="margin:0;font-family:'Grenze',Georgia,serif;font-size:clamp(1.75rem,1.1rem + 2vw,3rem);font-weight:700;line-height:1.1;letter-spacing:.01em;text-wrap:balance">[Short description: one or two sentences with the hook, in plain words.]</h2>
+<div style="max-width:62ch;display:flex;flex-direction:column;gap:16px;font-size:20px;line-height:1.55">
+<p style="margin:0">[Paragraph 1: the world, and who the player is in it.]</p>
+<p style="margin:0">[Paragraph 2: what a match or session looks like from start to finish.]</p>
+<p style="margin:0">[Paragraph 3: what makes it different from the games it’ll be compared to.]</p>
+</div>
+<figure style="margin:8px 0 0;padding-top:20px;border-top:6px double #121110;max-width:62ch;display:flex;flex-direction:column;gap:8px">
+<blockquote style="margin:0;font-family:'Grenze',Georgia,serif;font-style:italic;font-weight:400;font-size:clamp(24px,1rem + 1vw,30px);line-height:1.3">“A crown is a hat that lets the rain in.”</blockquote>
+<figcaption class="lbl" style="color:#4a443d">A saying from the game</figcaption>
+</figure>
+</div>
+<aside aria-labelledby="facts-title" style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:20px;padding:28px;border:3px solid #121110">
+<h2 id="facts-title" class="lbl">Fact sheet</h2>
+<dl style="margin:0;display:flex;flex-direction:column">
+<div class="dl-row"><dt>Status</dt><dd style="font-weight:700">Wishlist on Steam</dd></div>
+<div class="dl-row"><dt>Release</dt><dd>[Release window]</dd></div>
+<div class="dl-row"><dt>Platform</dt><dd>PC (Windows)</dd></div>
+<div class="dl-row"><dt>Stores</dt><dd>Steam, itch.io</dd></div>
+<div class="dl-row"><dt>Genre</dt><dd>[Genre]</dd></div>
+<div class="dl-row"><dt>Players</dt><dd>[Player count]</dd></div>
+<div class="dl-row"><dt>Price</dt><dd>[Price]</dd></div>
+<div class="dl-row"><dt>Languages</dt><dd>[Languages]</dd></div>
+<div class="dl-row"><dt>Engine</dt><dd>Unity</dd></div>
+<div class="dl-row"><dt>Developer</dt><dd>DeadCode Studios</dd></div>
+</dl>
+<a class="ink-btn" href="https://store.steampowered.com/app/APPID/?utm_source=studiosite&utm_medium=web&utm_campaign=coming_soon&utm_content=post_trailer" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border:2px solid #121110;background:#121110;color:#e8e0d0;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Wishlist on Steam</a>
+</aside>
+</section>
+
+<section id="features" aria-labelledby="features-title" style="display:flex;flex-direction:column;gap:40px">
+<div class="rule">
+<h2 id="features-title" class="h2">Features</h2>
+</div>
+<div style="display:flex;flex-direction:column;gap:clamp(40px,5vw,72px)">
+<article style="display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 480px;min-width:0;aspect-ratio:16/9;border:3px solid #121110;background:#1a1816;display:flex;align-items:flex-end;padding:14px;box-sizing:border-box"><span class="ph">In-game GIF · 5–10 second loop</span></div>
+<div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<p class="lbl" style="color:#4a443d">Feature 01</p>
+<h3 class="h3">[Feature title]</h3>
+<p style="margin:0;color:#4a443d;font-size:20px;line-height:1.55">[Two or three sentences: what the player does and why it’s fun.]</p>
+</div>
+</article>
+<article style="display:flex;flex-wrap:wrap;flex-direction:row-reverse;align-items:center;gap:24px 56px">
+<div style="flex:1 1 480px;min-width:0;aspect-ratio:16/9;border:3px solid #121110;background:#1a1816;display:flex;align-items:flex-end;padding:14px;box-sizing:border-box"><span class="ph">In-game GIF · 5–10 second loop</span></div>
+<div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<p class="lbl" style="color:#4a443d">Feature 02</p>
+<h3 class="h3">[Feature title]</h3>
+<p style="margin:0;color:#4a443d;font-size:20px;line-height:1.55">[Two or three sentences: what the player does and why it’s fun.]</p>
+</div>
+</article>
+<article style="display:flex;flex-wrap:wrap;align-items:center;gap:24px 56px">
+<div style="flex:1 1 480px;min-width:0;aspect-ratio:16/9;border:3px solid #121110;background:#1a1816;display:flex;align-items:flex-end;padding:14px;box-sizing:border-box"><span class="ph">In-game GIF · 5–10 second loop</span></div>
+<div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:14px">
+<p class="lbl" style="color:#4a443d">Feature 03</p>
+<h3 class="h3">[Feature title]</h3>
+<p style="margin:0;color:#4a443d;font-size:20px;line-height:1.55">[Two or three sentences: what the player does and why it’s fun.]</p>
+</div>
+</article>
+</div>
+</section>
+
+<section id="screenshots" aria-labelledby="shots-title" style="display:flex;flex-direction:column;gap:32px">
+<div class="rule">
+<h2 id="shots-title" class="h2">Screenshots</h2>
+<p class="lbl" style="color:#4a443d">In-game captures · 1920×1080</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px">
+
+<button class="card" type="button" aria-label="Open screenshot 01 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 01</span>
+</button>
+
+<button class="card" type="button" aria-label="Open screenshot 02 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 02</span>
+</button>
+
+<button class="card" type="button" aria-label="Open screenshot 03 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 03</span>
+</button>
+
+<button class="card" type="button" aria-label="Open screenshot 04 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 04</span>
+</button>
+
+<button class="card" type="button" aria-label="Open screenshot 05 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 05</span>
+</button>
+
+<button class="card" type="button" aria-label="Open screenshot 06 of 6" style="aspect-ratio:16/9;padding:0;border:3px solid #121110;overflow:hidden;background:#1a1816;display:flex;align-items:flex-end;justify-content:flex-start;font-family:inherit;cursor:pointer">
+<span class="ph" style="margin:12px">Screenshot 06</span>
+</button>
+
+</div>
+</section>
+
+<section aria-labelledby="steam-title" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 48px;padding:clamp(24px,3vw,40px);border:3px solid #121110">
+<div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:10px">
+<h2 id="steam-title" class="h3">Kingdom of Kings on Steam</h2>
+<p style="margin:0;color:#4a443d;font-size:19px;line-height:1.5">Steam’s own store widget, loaded only when you ask for it.</p>
+</div>
+<div style="flex:1 1 480px;max-width:646px;min-height:190px;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;border:2px dashed #121110">
+<button class="ink-btn" type="button" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:2px solid #121110;background:#121110;color:#e8e0d0;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">Load the Steam widget</button>
+</div>
+</section>
+
+<section id="updates" aria-labelledby="updates-title" style="display:flex;flex-direction:column;gap:16px">
+<div class="rule">
+<h2 id="updates-title" class="h2">Updates</h2>
+<a class="arrow" href="index.html">All devlog posts<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 2l8 7-8 7"></path></svg></a>
+</div>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column">
+<li style="border-bottom:2px solid #121110">
+<a class="row-link" href="#" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding:20px 0;text-decoration:none;color:#121110">
+<span class="lbl" style="flex:0 0 130px;color:#4a443d">[Date]</span>
+<span class="tagd">Devlog</span>
+<span class="row-title" style="flex:1 1 320px;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.2">Kingdom of Kings Devlog #2: [Topic]</span>
+<svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 2l8 7-8 7"></path></svg>
+</a>
+</li>
+<li style="border-bottom:2px solid #121110">
+<a class="row-link" href="#" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding:20px 0;text-decoration:none;color:#121110">
+<span class="lbl" style="flex:0 0 130px;color:#4a443d">[Date]</span>
+<span class="tagd">Devlog</span>
+<span class="row-title" style="flex:1 1 320px;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.2">Kingdom of Kings Devlog #1: [Topic]</span>
+<svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 2l8 7-8 7"></path></svg>
+</a>
+</li>
+<li style="border-bottom:2px solid #121110">
+<a class="row-link" href="#" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;padding:20px 0;text-decoration:none;color:#121110">
+<span class="lbl" style="flex:0 0 130px;color:#4a443d">[Date]</span>
+<span class="tagd">Announcement</span>
+<span class="row-title" style="flex:1 1 320px;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.2">[Announcement title, e.g. the Steam page is live]</span>
+<svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M5 2l8 7-8 7"></path></svg>
+</a>
+</li>
+</ul>
+</section>
+
+<section id="faq" aria-labelledby="faq-title" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:32px 64px">
+<div style="flex:1 1 260px;display:flex;flex-direction:column;gap:14px">
+<h2 id="faq-title" class="h2">FAQ</h2>
+<p style="margin:0;color:#4a443d;font-size:19px;line-height:1.5">Not answered here? Ask in Discord or email <a href="#">[hello@yourdomain]</a>.</p>
+</div>
+<div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;border-top:2px solid #121110">
+<details open="" style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">When does Kingdom of Kings come out?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Release window]. Wishlist it on Steam and Steam will email you the day it launches.</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Which platforms will it be on?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">PC (Windows), on Steam and itch.io. [Any other platforms you’re planning.]</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">How much will it cost?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Price, or “We’ll announce the price closer to launch.”]</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Is it multiplayer? How do servers work?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Player count, online or local, and how servers are hosted.]</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Will it run on Steam Deck?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Your Steam Deck plans.]</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Which languages will it support?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Languages at launch, and any planned later.]</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Can I stream it or make videos?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">[Your creator policy in one line, e.g. “Yes, and you can monetize them.”] <a href="#">Read the creator policy</a>.</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">Where can I learn the rules?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">Everything about how to play is in the <a href="#">Kingdom of Kings rules wiki</a>.</p>
+</details>
+<details style="border-bottom:2px solid #121110">
+<summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px;padding:20px 0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25;cursor:pointer">What are the system requirements?<svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true" style="flex:0 0 auto"><path d="M5 9l7 7 7-7"></path></svg></summary>
+<p style="margin:0 0 24px;max-width:62ch;color:#4a443d;font-size:19px;line-height:1.55">They’re on the Steam page, and we keep them up to date there.</p>
+</details>
+</div>
+</section>
+
+<section id="community" aria-labelledby="community-title" style="display:flex;flex-direction:column;gap:32px">
+<div class="rule">
+<h2 id="community-title" class="h2">Community</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:20px">
+<a class="card" href="#" style="display:flex;flex-direction:column;gap:12px;padding:24px;border:3px solid #121110;text-decoration:none;color:#121110">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M4 4h16v12H10l-5 4v-4H4z"></path><path d="M8 9h8"></path><path d="M8 12h5"></path></svg>
+<h3 style="margin:0;font-family:'Grenze',Georgia,serif;font-size:26px;font-weight:700;line-height:1.15">Discord</h3>
+<p style="margin:0;color:#4a443d;font-size:18px;line-height:1.45">Talk with us and other players.</p>
+<span class="arrow" style="margin-top:auto;color:#7a3612">Join the Discord</span>
+</a>
+<a class="card" href="#" style="display:flex;flex-direction:column;gap:12px;padding:24px;border:3px solid #121110;text-decoration:none;color:#121110">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14a6.5 6.5 0 0 1 3.5 6"></path></svg>
+<h3 style="margin:0;font-family:'Grenze',Georgia,serif;font-size:26px;font-weight:700;line-height:1.15">Steam community hub</h3>
+<p style="margin:0;color:#4a443d;font-size:18px;line-height:1.45">Discussions, guides and screenshots.</p>
+<span class="arrow" style="margin-top:auto;color:#7a3612">Open the hub</span>
+</a>
+<a class="card" href="#" style="display:flex;flex-direction:column;gap:12px;padding:24px;border:3px solid #121110;text-decoration:none;color:#121110">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M5 4h14v16H8a3 3 0 0 1-3-3z"></path><path d="M5 17a3 3 0 0 1 3-3h11"></path></svg>
+<h3 style="margin:0;font-family:'Grenze',Georgia,serif;font-size:26px;font-weight:700;line-height:1.15">Wiki / How to play</h3>
+<p style="margin:0;color:#4a443d;font-size:18px;line-height:1.45">The full rules, kept up to date.</p>
+<span class="arrow" style="margin-top:auto;color:#7a3612">Read the rules</span>
+</a>
+<a class="card" href="#" style="display:flex;flex-direction:column;gap:12px;padding:24px;border:3px solid #121110;text-decoration:none;color:#121110">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="3" y="3" width="18" height="18"></rect><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+<h3 style="margin:0;font-family:'Grenze',Georgia,serif;font-size:26px;font-weight:700;line-height:1.15">Follow us on Steam</h3>
+<p style="margin:0;color:#4a443d;font-size:18px;line-height:1.45">Get notified when we release something new.</p>
+<span class="arrow" style="margin-top:auto;color:#7a3612">Follow the studio</span>
+</a>
+</div>
+</section>
+
+<section id="press" aria-labelledby="press-title" style="display:flex;flex-wrap:wrap;gap:24px">
+<div class="plate" style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:clamp(40px,4vw,56px);color:#e8e0d0">
+<p class="lbl" style="color:#e07b2e">For press and creators</p>
+<h2 id="press-title" style="margin:0;font-family:'Grenze',Georgia,serif;font-size:clamp(1.75rem,1rem + 1.6vw,2.5rem);font-weight:800;line-height:1.05;letter-spacing:.03em;text-transform:uppercase">Press kit</h2>
+<p style="margin:0;max-width:44ch;color:#b8ae9c;font-size:19px;line-height:1.5">Fact sheet, trailer, screenshots, logos and key art. Free to use for coverage, no login needed.</p>
+<p style="margin:0;color:#b8ae9c;font-size:16px">Last updated [Date]</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:6px">
+<a class="cta" href="#" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 4v11"></path><path d="M7 10l5 5 5-5"></path><path d="M5 20h14"></path></svg>Open the press kit</a>
+<a class="ghost" href="#" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:2px solid #6b6258;color:#e8e0d0;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Creator policy</a>
+</div>
+</div>
+<div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:16px;padding:clamp(24px,3vw,40px);border:3px solid #121110">
+<h2 class="h3">Credits</h2>
+<dl style="margin:0;display:flex;flex-direction:column">
+<div class="dl-row" style="flex-wrap:wrap"><dt style="font-family:'Alegreya Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:0;text-transform:none;color:#121110">[Name]</dt><dd style="color:#4a443d">[Role, e.g. design and code]</dd></div>
+<div class="dl-row" style="flex-wrap:wrap"><dt style="font-family:'Alegreya Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:0;text-transform:none;color:#121110">[Name]</dt><dd style="color:#4a443d">[Role, e.g. art and UI]</dd></div>
+<div class="dl-row" style="flex-wrap:wrap"><dt style="font-family:'Alegreya Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:0;text-transform:none;color:#121110">[Name]</dt><dd style="color:#4a443d">[Role, e.g. audio and music]</dd></div>
+<div class="dl-row" style="flex-wrap:wrap"><dt style="font-family:'Alegreya Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:0;text-transform:none;color:#121110">[Contractor name]</dt><dd style="color:#4a443d">[Role]</dd></div>
+</dl>
+<p class="lbl" style="color:#4a443d">Made with Unity</p>
+</div>
+</section>
+
+</div>
+</div>
+</div>
+</main>
+
+<footer id="newsletter" style="background:#D2CDB7">
+<div aria-hidden="true" style="height:28px;margin-bottom:-1px;background:repeating-linear-gradient(90deg,#0a0908 0,#0a0908 56px,transparent 56px,transparent 112px)"></div>
+<div style="position:relative;overflow:hidden;background:#0a0908;color:#e8e0d0;padding:clamp(56px,6vw,96px) 0 32px">
+<svg aria-hidden="true" width="100%" height="100%" style="position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay"><filter id="grain-game-foot"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#grain-game-foot)"></rect></svg>
+<div style="position:relative;width:100%;max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,64px);box-sizing:border-box;display:flex;flex-direction:column;gap:64px">
+
+<div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:28px 64px">
+<div style="flex:1 1 380px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-family:'Grenze',Georgia,serif;font-size:clamp(1.75rem,1rem + 2vw,2.75rem);font-weight:800;line-height:1.05;letter-spacing:.03em;text-transform:uppercase">Kingdom of Kings updates by email</h2>
+<p style="margin:0;max-width:480px;color:#b8ae9c;font-size:19px;line-height:1.5">Devlog posts and playtest invites, about [N] emails a month. Nothing else.</p>
+</div>
+<div style="flex:1 1 440px;min-width:0">
+<span data-if="notSubscribed">
+<form data-action="subscribe" style="display:flex;flex-direction:column;gap:10px">
+<label for="nl-email-game" class="lbl" style="color:#e8e0d0">Email address</label>
+<div style="display:flex;flex-wrap:wrap;align-items:stretch;gap:8px">
+<input class="field" id="nl-email-game" type="email" required="" autocomplete="email" placeholder="you@example.com" style="flex:1 1 220px;min-width:0;min-height:52px;padding:0 16px;box-sizing:border-box;border:2px solid #6b6258;background:#121110;color:#e8e0d0;font-family:inherit;font-size:18px">
+<button class="cta" type="submit" style="flex:0 0 auto;min-height:52px;padding:0 28px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;font-family:'Grenze',Georgia,serif;font-size:17px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">Join</button>
+</div>
+<p style="margin:0;color:#b8ae9c;font-size:16px;line-height:1.4">We’ll send one email to confirm it’s you. Unsubscribe anytime. <a href="#">Privacy policy</a></p>
+</form>
+</span>
+<span data-if="subscribed" hidden>
+<div role="status" class="plate" style="display:flex;flex-direction:column;gap:14px;padding:32px 40px">
+<p style="margin:0;font-family:'Grenze',Georgia,serif;font-size:24px;font-weight:700;line-height:1.25">Almost there. Check your inbox to confirm.</p>
+<p style="margin:0;color:#b8ae9c;font-size:18px;line-height:1.45">While you wait:</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<a class="cta" href="https://store.steampowered.com/app/APPID/?utm_source=studiosite&utm_medium=web&utm_campaign=coming_soon&utm_content=newsletter_confirm" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Wishlist on Steam</a>
+<a class="ghost" href="#community" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:2px solid #6b6258;color:#e8e0d0;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:600;letter-spacing:.08em;text-transform:uppercase">Join the Discord</a>
+</div>
+<button type="button" data-action="reset-form" style="align-self:flex-start;min-height:44px;padding:0;border:0;background:transparent;color:#b8ae9c;font-family:inherit;font-size:16px;text-decoration:underline;text-underline-offset:4px;cursor:pointer">Use a different email</button>
+</div>
+</span>
+</div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px 64px;padding-top:40px;border-top:6px double #34302b">
+<nav aria-label="Footer" style="flex:999 1 520px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:32px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="lbl" style="color:#b8ae9c">Studio</h3>
+<ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px">
+<li><a class="foot-link" href="index.html">Games</a></li>
+<li><a class="foot-link" href="index.html">About</a></li>
+<li><a class="foot-link" href="index.html">Devlog</a></li>
+<li><a class="foot-link" href="#">Collaborate</a></li>
+<li><a class="foot-link" href="#press">Press</a></li>
+<li><a class="foot-link" href="#">Contact</a></li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="lbl" style="color:#b8ae9c">Community</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+<li><a class="foot-link" href="#">Discord</a></li>
+<li><a class="foot-link" href="#">Steam</a></li>
+<li><a class="foot-link" href="#">itch.io</a></li>
+</ul>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<h3 class="lbl" style="color:#b8ae9c">Policies</h3>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+<li><a class="foot-link" href="#">Privacy</a></li>
+<li><a class="foot-link" href="#">Accessibility</a></li>
+<li><a class="foot-link" href="#">Creator policy</a></li>
+</ul>
+</div>
+</nav>
+<div style="flex:1 1 260px;display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+<p style="margin:0;font-family:'Grenze Gotisch','Old English Text MT',Georgia,serif;font-size:34px;font-weight:800;line-height:1;color:#e8e0d0">Kingdom of Kings</p>
+<p style="margin:0;color:#b8ae9c;font-size:18px;line-height:1.45">Wishlist on Steam · [Release window]</p>
+<a class="cta" href="https://store.steampowered.com/app/APPID/?utm_source=studiosite&utm_medium=web&utm_campaign=coming_soon&utm_content=footer" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border:2px solid #e07b2e;background:#e07b2e;color:#0a0908;text-decoration:none;font-family:'Grenze',Georgia,serif;font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Wishlist on Steam</a>
+</div>
+</div>
+
+<p aria-hidden="true" style="margin:0;font-family:'Grenze Gotisch','Old English Text MT',Georgia,serif;font-size:clamp(3rem,0.5rem + 7.5vw,8.5rem);font-weight:800;line-height:.95;color:#e8e0d0;text-shadow:3px 3px 0 #34302b,6px 6px 0 #1a1816;overflow-wrap:anywhere">DeadCode Studios</p>
+
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 32px;padding-top:24px;border-top:1px solid #34302b;color:#b8ae9c;font-size:16px;line-height:1.45">
+<p style="margin:0">© 2026 DeadCode Studios. [Legal entity line, if you have one]</p>
+<a href="#main" style="display:inline-flex;align-items:center;min-height:44px;color:#b8ae9c;font-size:16px">Back to top</a>
+</div>
+
+</div>
+</div>
+</footer>
+</div>
+
+<script src="site.js" defer></script>
+</body>
+</html>
