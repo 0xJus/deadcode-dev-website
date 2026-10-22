@@ -1,4 +1,22 @@
 /* Shared styles from the Iron and Ember design. */
+
+/* Animated scroll for in-page links (nav, skip link, section buttons).
+   The header is absolutely positioned and scrolls away, so the scroll padding
+   is only breathing room above a section; raise it if the header ever sticks.
+   Instant jumps for visitors who ask for reduced motion, and while the
+   "Pause motion" button is on (it sets .paused on body). */
+html {
+  scroll-padding-top: 24px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  html:has(body.paused) {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
   background: #0a0908;

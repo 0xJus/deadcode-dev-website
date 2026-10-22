@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Pauses or resumes the ember flicker animation on the whole page. */
+/** Pauses or resumes the ember flicker animation and the smooth scroll on in-page links (see globals.css). */
 export default function MotionToggle() {
   const [paused, setPaused] = useState(false);
 
