@@ -56,6 +56,33 @@ export default function GamePage() {
             className="hero-art"
             style={{ position: "absolute", inset: "0", pointerEvents: "none" }}
           >
+            {/* Text-free key art from the Steam art pass (the library hero), under a void scrim so the
+                logo and copy keep their contrast. */}
+            <img
+              src="/game/key-art-1920.jpg"
+              srcSet="/game/key-art-960.jpg 960w, /game/key-art-1920.jpg 1920w"
+              sizes="100vw"
+              alt=""
+              width={1920}
+              height={620}
+              fetchPriority="high"
+              style={{
+                position: "absolute",
+                inset: "0",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "50% 100%",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: "0",
+                background:
+                  "linear-gradient(180deg,rgba(10,9,8,.92) 0%,rgba(10,9,8,.72) 38%,rgba(10,9,8,.5) 62%,rgba(10,9,8,.2) 100%)",
+              }}
+            ></div>
             <div
               className="flicker"
               style={{
@@ -68,65 +95,6 @@ export default function GamePage() {
                 background:
                   "radial-gradient(ellipse at 50% 50%,rgba(224,123,46,.5) 0%,rgba(122,54,18,.28) 32%,rgba(10,9,8,0) 66%)",
                 animationPlayState: "running",
-              }}
-            ></div>
-            <div
-              data-parallax="0.6"
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "110px",
-                bottom: "0",
-                width: "min(640px,90vw)",
-                transform: "translateX(-50%)",
-                border: "2px solid rgba(232,224,208,.16)",
-                borderBottom: "0",
-                borderRadius: "999px 999px 0 0",
-              }}
-            ></div>
-            <div
-              data-parallax="1"
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "150px",
-                bottom: "0",
-                width: "min(560px,80vw)",
-                transform: "translateX(-50%)",
-                border: "2px solid rgba(232,224,208,.24)",
-                borderBottom: "0",
-                borderRadius: "999px 999px 0 0",
-              }}
-            ></div>
-            <div
-              className="flicker"
-              data-parallax="1.4"
-              data-ember-source
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "200px",
-                bottom: "0",
-                width: "min(470px,70vw)",
-                transform: "translateX(-50%)",
-                border: "2px solid #7a3612",
-                borderBottom: "0",
-                borderRadius: "999px 999px 0 0",
-                background:
-                  "linear-gradient(0deg,rgba(244,163,92,.5) 0%,rgba(224,123,46,.2) 46%,rgba(10,9,8,0) 100%)",
-                boxShadow: "inset 0 0 80px rgba(224,123,46,.28)",
-                animationPlayState: "running",
-              }}
-            ></div>
-            <div
-              style={{
-                position: "absolute",
-                left: "0",
-                right: "0",
-                bottom: "96px",
-                height: "2px",
-                background:
-                  "linear-gradient(90deg,rgba(224,123,46,0),rgba(224,123,46,.65),rgba(224,123,46,0))",
               }}
             ></div>
           </div>
@@ -207,31 +175,14 @@ export default function GamePage() {
                 </span>
                 <span style={{ color: "#b8ae9c" }}>[Release window]</span>
               </p>
-              <h1
-                id="game-title"
-                className="rise d1"
-                style={{
-                  margin: "0",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  fontFamily: "'Grenze Gotisch','Old English Text MT',Georgia,serif",
-                  fontWeight: "800",
-                  lineHeight: ".9",
-                }}
-              >
-                <span className="wm" style={{ fontSize: "clamp(3.75rem,1rem + 8vw,9.5rem)" }}>
-                  <span className="wm-back" aria-hidden="true">
-                    Kingdom
-                  </span>
-                  <span className="wm-front">Kingdom</span>
-                </span>
-                <span className="wm" style={{ fontSize: "clamp(3.75rem,1rem + 8vw,9.5rem)" }}>
-                  <span className="wm-back" aria-hidden="true">
-                    of Kings
-                  </span>
-                  <span className="wm-front">of Kings</span>
-                </span>
+              <h1 id="game-title" className="rise d1" style={{ margin: "0" }}>
+                <img
+                  src="/game/logo-stacked.png"
+                  alt="Kingdom of Kings"
+                  width={1280}
+                  height={630}
+                  style={{ display: "block", width: "min(640px,88vw)", height: "auto" }}
+                />
               </h1>
               <p
                 className="rise d2"
@@ -338,30 +289,6 @@ export default function GamePage() {
                 gap: "12px 16px",
               }}
             >
-              <p
-                style={{
-                  margin: "0",
-                  display: "flex",
-                  flexWrap: "wrap",
-                  alignItems: "baseline",
-                  gap: "4px 10px",
-                  maxWidth: "540px",
-                  padding: "10px 14px",
-                  border: "1px dashed #6b6258",
-                  background: "rgba(18,17,16,.9)",
-                  color: "#b8ae9c",
-                  fontSize: "16px",
-                  lineHeight: "1.4",
-                }}
-              >
-                <span className="lbl" style={{ color: "#e8e0d0" }}>
-                  Key art
-                </span>
-                <span>
-                  Placeholder. Use the same text-free art as the Steam Library Hero, with the focal
-                  point behind the logo.
-                </span>
-              </p>
               <MotionToggle />
             </div>
           </div>
