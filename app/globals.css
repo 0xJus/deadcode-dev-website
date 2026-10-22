@@ -1,0 +1,378 @@
+/* Shared styles from the Iron and Ember design. */
+body {
+  margin: 0;
+  background: #0a0908;
+}
+a {
+  color: #f4a35c;
+}
+a:hover {
+  color: #ffc38a;
+}
+.parch a {
+  color: #7a3612;
+}
+.parch a:hover {
+  color: #4d2209;
+}
+:focus-visible {
+  outline: 2px solid #e07b2e;
+  outline-offset: 3px;
+}
+.parch :focus-visible {
+  outline-color: #7a3612;
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 12px;
+  z-index: 20;
+}
+.skip:focus {
+  left: 16px;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #e8e0d0;
+  text-decoration: none;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nav-link:hover {
+  color: #f4a35c;
+}
+.foot-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: #e8e0d0;
+  text-decoration: none;
+  font-size: 18px;
+}
+.foot-link:hover {
+  color: #f4a35c;
+}
+.h2 {
+  margin: 0;
+  font-family: "Grenze", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 1.25rem + 2.5vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lbl {
+  margin: 0;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.rule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-bottom: 16px;
+  border-bottom: 6px double #121110;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 0 12px;
+  background: #121110;
+  color: #e8e0d0;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.tagd {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 2px dashed #121110;
+  color: #121110;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #e07b2e;
+}
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  text-decoration: none;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ph {
+  padding: 5px 9px;
+  background: #121110;
+  color: #e8e0d0;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.cta {
+  transition:
+    box-shadow 0.2s ease-out,
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+.cta:hover,
+.cta:focus-visible {
+  background-color: #f4a35c !important;
+  border-color: #f4a35c !important;
+  box-shadow: 0 0 28px rgba(244, 163, 92, 0.45);
+}
+.ghost {
+  transition: border-color 0.2s ease-out;
+}
+.ghost:hover,
+.ghost:focus-visible {
+  border-color: #e8e0d0 !important;
+}
+.ink-btn {
+  transition:
+    background-color 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+.ink-btn:hover,
+.ink-btn:focus-visible {
+  background-color: #7a3612 !important;
+  border-color: #7a3612 !important;
+}
+.card {
+  transition: border-color 0.2s ease-out;
+}
+.card:hover,
+.card:focus-visible {
+  border-color: #7a3612 !important;
+}
+.plate {
+  position: relative;
+  background: rgba(18, 17, 16, 0.94);
+  border: 1px solid #34302b;
+  border-top: 6px solid #24211e;
+}
+.plate::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  background:
+    linear-gradient(#4a443d, #4a443d) left top/8px 8px no-repeat,
+    linear-gradient(#4a443d, #4a443d) right top/8px 8px no-repeat,
+    linear-gradient(#4a443d, #4a443d) left bottom/8px 8px no-repeat,
+    linear-gradient(#4a443d, #4a443d) right bottom/8px 8px no-repeat;
+}
+.wm {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.wm-front {
+  position: relative;
+  color: #e4dac8;
+  background: linear-gradient(180deg, #fff8ec 10%, #bdb19d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.field {
+  transition:
+    box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out;
+}
+.field:focus,
+.field:focus-visible {
+  outline: none;
+  border-color: #e07b2e !important;
+  box-shadow: 0 0 0 4px rgba(224, 123, 46, 0.18);
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+  18% {
+    opacity: 1;
+  }
+  34% {
+    opacity: 0.88;
+  }
+  52% {
+    opacity: 0.97;
+  }
+  71% {
+    opacity: 0.84;
+  }
+}
+input::placeholder {
+  color: #8f8679;
+}
+body.paused .flicker {
+  animation-play-state: paused !important;
+}
+
+/* Rules that differ per page, scoped to .pg-home */
+.pg-home .media {
+  transition: transform 0.25s ease-out;
+}
+.pg-home .wm-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #5e4e3f;
+  text-shadow:
+    1px 1px 0 #5e4e3f,
+    2px 2px 0 #54463a,
+    3px 3px 0 #3b3128,
+    4px 4px 0 #161210;
+  user-select: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pg-home .card:hover .media,
+  .pg-home .card:focus-visible .media {
+    transform: scale(1.04);
+  }
+  .pg-home .rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .pg-home .d1 {
+    animation-delay: 0.08s;
+  }
+  .pg-home .d2 {
+    animation-delay: 0.16s;
+  }
+  .pg-home .d3 {
+    animation-delay: 0.24s;
+  }
+  .pg-home .d4 {
+    animation-delay: 0.32s;
+  }
+  .pg-home .flicker {
+    animation: flicker 7s ease-in-out infinite;
+  }
+}
+
+/* Rules that differ per page, scoped to .pg-game */
+.pg-game .h3 {
+  margin: 0;
+  font-family: "Grenze", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.1rem + 1.4vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.pg-game .dl-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 2px dashed #6b6258;
+}
+.pg-game .dl-row:last-child {
+  border-bottom: 0;
+}
+.pg-game .dl-row dt {
+  font-family: "Grenze", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a443d;
+  align-self: center;
+}
+.pg-game .dl-row dd {
+  margin: 0;
+  font-size: 18px;
+  text-align: right;
+}
+.pg-game .row-link:hover .row-title {
+  color: #7a3612;
+}
+.pg-game .wm-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #5e4e3f;
+  text-shadow:
+    1px 1px 0 #5e4e3f,
+    2px 2px 0 #5a4a3c,
+    3px 3px 0 #50423a,
+    4px 4px 0 #43372e,
+    5px 5px 0 #342b24,
+    6px 6px 0 #231d19,
+    8px 8px 0 #161210,
+    10px 18px 36px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+.pg-game summary::-webkit-details-marker {
+  display: none;
+}
+.pg-game summary {
+  list-style: none;
+}
+.pg-game .chev {
+  transition: transform 0.2s ease-out;
+}
+.pg-game details[open] .chev {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pg-game .rise {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .pg-game .d1 {
+    animation-delay: 0.08s;
+  }
+  .pg-game .d2 {
+    animation-delay: 0.16s;
+  }
+  .pg-game .d3 {
+    animation-delay: 0.24s;
+  }
+  .pg-game .d4 {
+    animation-delay: 0.32s;
+  }
+  .pg-game .flicker {
+    animation: flicker 7s ease-in-out infinite;
+  }
+}
