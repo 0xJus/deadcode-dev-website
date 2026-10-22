@@ -27,18 +27,42 @@ a {
 a:hover {
   color: #ffc38a;
 }
+/* The content area under the hero sits on the dark page ground. Its ink colors are variables so
+   that the parchment cards (.leaf) can flip them back to dark ink on paper. */
+.parch {
+  --ink: #e8e0d0;
+  --ink-2: #b8ae9c;
+  --line: #6b6258;
+  --paper: #121110;
+  --accent-ink: #f4a35c;
+  --link: #f4a35c;
+  --link-hover: #ffc38a;
+  --focus: #e07b2e;
+  color: var(--ink);
+}
+.leaf {
+  --ink: #121110;
+  --ink-2: #4a443d;
+  --paper: #e8e0d0;
+  --accent-ink: #7a3612;
+  --link: #7a3612;
+  --link-hover: #4d2209;
+  --focus: #7a3612;
+  background: #d2cdb7;
+  color: var(--ink);
+}
 .parch a {
-  color: #7a3612;
+  color: var(--link);
 }
 .parch a:hover {
-  color: #4d2209;
+  color: var(--link-hover);
 }
 :focus-visible {
   outline: 2px solid #e07b2e;
   outline-offset: 3px;
 }
 .parch :focus-visible {
-  outline-color: #7a3612;
+  outline-color: var(--focus);
 }
 .skip {
   position: absolute;
@@ -100,7 +124,7 @@ a:hover {
   justify-content: space-between;
   gap: 12px 24px;
   padding-bottom: 16px;
-  border-bottom: 6px double #121110;
+  border-bottom: 6px double var(--ink, #121110);
 }
 .tag {
   display: inline-flex;
@@ -108,8 +132,8 @@ a:hover {
   gap: 8px;
   min-height: 30px;
   padding: 0 12px;
-  background: #121110;
-  color: #e8e0d0;
+  background: var(--ink, #121110);
+  color: var(--paper, #e8e0d0);
   font-family: "Grenze", Georgia, serif;
   font-size: 14px;
   font-weight: 600;
@@ -121,8 +145,8 @@ a:hover {
   align-items: center;
   min-height: 30px;
   padding: 0 12px;
-  border: 2px dashed #121110;
-  color: #121110;
+  border: 2px dashed var(--ink, #121110);
+  color: var(--ink, #121110);
   font-family: "Grenze", Georgia, serif;
   font-size: 14px;
   font-weight: 600;
@@ -183,15 +207,15 @@ a:hover {
 }
 .ink-btn:hover,
 .ink-btn:focus-visible {
-  background-color: #7a3612 !important;
-  border-color: #7a3612 !important;
+  background-color: var(--accent-ink, #7a3612) !important;
+  border-color: var(--accent-ink, #7a3612) !important;
 }
 .card {
   transition: border-color 0.2s ease-out;
 }
 .card:hover,
 .card:focus-visible {
-  border-color: #7a3612 !important;
+  border-color: var(--accent-ink, #7a3612) !important;
 }
 .plate {
   position: relative;
@@ -324,7 +348,7 @@ body.paused .flicker {
   justify-content: space-between;
   gap: 16px;
   padding: 11px 0;
-  border-bottom: 2px dashed #6b6258;
+  border-bottom: 2px dashed var(--line, #6b6258);
 }
 .pg-game .dl-row:last-child {
   border-bottom: 0;
@@ -335,7 +359,7 @@ body.paused .flicker {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4a443d;
+  color: var(--ink-2, #4a443d);
   align-self: center;
 }
 .pg-game .dl-row dd {
@@ -344,7 +368,7 @@ body.paused .flicker {
   text-align: right;
 }
 .pg-game .row-link:hover .row-title {
-  color: #7a3612;
+  color: var(--accent-ink, #7a3612);
 }
 .pg-game .wm-back {
   position: absolute;
@@ -393,4 +417,171 @@ body.paused .flicker {
   .pg-game .flicker {
     animation: flicker 7s ease-in-out infinite;
   }
+}
+
+/* Hero content clears the absolutely positioned header on wide screens. Below 1180px the header
+   wraps onto several rows, so it sits in the flow and the hero starts right after it. */
+.hero-body {
+  padding-top: clamp(150px, 14vw, 170px);
+}
+@media (max-width: 1180px) {
+  .site-header {
+    position: relative !important;
+  }
+  .hero-body {
+    padding-top: 32px;
+  }
+}
+
+/* The hero art fades out at the bottom, and on the home page its left edge fades out behind the
+   headline, so it dissolves into the page ground instead of ending on a hard edge. */
+.hero-art {
+  -webkit-mask-image: linear-gradient(180deg, #000 66%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 66%, transparent 100%);
+}
+.hero-arch {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.55) 18%, #000 45%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.55) 18%, #000 45%);
+}
+
+/* Page-wide atmosphere (components/AmbientBackground.tsx). Layers from the back:
+   fog, vignette and grain (.ambient, z-index 0), embers (z-index 1), then the page content
+   (z-index 2 and up), so cards and text sit in front of the drifting embers. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.fog {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+.fog-a {
+  left: -20vw;
+  bottom: -26vh;
+  width: 140vw;
+  height: 72vh;
+  background: radial-gradient(closest-side, rgba(224, 123, 46, 0.13), rgba(224, 123, 46, 0));
+}
+.fog-b {
+  left: -30vw;
+  top: 4vh;
+  width: 130vw;
+  height: 64vh;
+  background: radial-gradient(closest-side, rgba(170, 156, 140, 0.075), rgba(170, 156, 140, 0));
+}
+.fog-c {
+  right: -35vw;
+  top: 40vh;
+  width: 120vw;
+  height: 60vh;
+  background: radial-gradient(closest-side, rgba(120, 128, 140, 0.07), rgba(120, 128, 140, 0));
+}
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 38%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.55) 100%);
+}
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+}
+.embers {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+@keyframes fog-drift-a {
+  from {
+    transform: translate3d(-8vw, 0, 0);
+  }
+  to {
+    transform: translate3d(12vw, -6vh, 0);
+  }
+}
+@keyframes fog-drift-b {
+  from {
+    transform: translate3d(6vw, 0, 0);
+  }
+  to {
+    transform: translate3d(-10vw, 5vh, 0);
+  }
+}
+@keyframes fog-drift-c {
+  from {
+    transform: translate3d(0, 4vh, 0);
+  }
+  to {
+    transform: translate3d(-12vw, -4vh, 0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fog-a {
+    animation: fog-drift-a 70s ease-in-out infinite alternate;
+  }
+  .fog-b {
+    animation: fog-drift-b 95s ease-in-out infinite alternate;
+  }
+  .fog-c {
+    animation: fog-drift-c 120s ease-in-out infinite alternate;
+  }
+  /* Sections below the fold fade in as they arrive (components/ScrollEffects.tsx adds .reveal). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+body.paused .fog {
+  animation-play-state: paused !important;
+}
+body.paused .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Ambient sound switch (components/SoundToggle.tsx) */
+.sound-toggle {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid #6b6258;
+  background: rgba(18, 17, 16, 0.92);
+  color: #e8e0d0;
+  font-family: "Grenze", Georgia, serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease-out,
+    color 0.2s ease-out;
+}
+.sound-toggle:hover {
+  border-color: #e8e0d0;
+}
+.sound-toggle[aria-pressed="true"] {
+  border-color: #e07b2e;
+  color: #f4a35c;
 }

@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import AmbientBackground from "@/components/AmbientBackground";
+import SoundToggle from "@/components/SoundToggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,7 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AmbientBackground />
+        {children}
+        <SoundToggle />
+      </body>
     </html>
   );
 }

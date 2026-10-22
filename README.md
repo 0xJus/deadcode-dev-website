@@ -17,8 +17,13 @@ npm run typecheck
 - `app/game/page.tsx`: Kingdom of Kings page
 - `app/layout.tsx`: fonts and site-wide metadata
 - `app/globals.css`: styles shared by both pages, plus the few rules scoped per page (`.pg-home`, `.pg-game`)
-- `components/`: `SiteHeader`, `SiteFooter`, `NewsletterForm` (client), `MotionToggle` (client)
-- `lib/steam.ts`: Steam store link helper
+- `components/`: `SiteHeader`, `SiteFooter`, `NewsletterForm` (client), `MotionToggle` (client), plus the atmosphere:
+  `AmbientBackground` (embers, fog, vignette, grain), `ScrollEffects` (section fade-ins, arch parallax) and `SoundToggle`
+- `lib/`: `steam.ts` (Steam store link helper), `motion.ts` (reduced-motion and Pause motion checks), `ambient-audio.ts` (optional wind and crackle, made with Web Audio)
+
+## Ambiance
+
+Everything that moves honors `prefers-reduced-motion` and the "Pause motion" button (a `paused` class on `body`). Sound is off until a visitor presses the Sound button, and it never autoplays. Layers, back to front: fog, vignette and grain (z-index 0), embers (1), page content (2 and up). To change the look, start with the ember count and sprite in `AmbientBackground.tsx`, the fog and vignette in `globals.css`, and the sound level (`LEVEL`) in `ambient-audio.ts`.
 
 ## Still to do before launch
 

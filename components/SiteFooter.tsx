@@ -16,21 +16,13 @@ export default function SiteFooter({
 }) {
   const base = home ? "" : "/";
   return (
-    <footer id="newsletter" style={{ background: "#D2CDB7" }}>
-      <div
-        aria-hidden="true"
-        style={{
-          height: "28px",
-          marginBottom: "-1px",
-          background:
-            "repeating-linear-gradient(90deg,#0a0908 0,#0a0908 56px,transparent 56px,transparent 112px)",
-        }}
-      ></div>
+    <footer id="newsletter" style={{ position: "relative", zIndex: "2" }}>
       <div
         style={{
           position: "relative",
           overflow: "hidden",
-          background: "#0a0908",
+          background: "rgba(10,9,8,.82)",
+          borderTop: "6px double #34302b",
           color: "#e8e0d0",
           padding: "clamp(56px,6vw,96px) 0 32px",
         }}

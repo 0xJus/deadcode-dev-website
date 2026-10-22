@@ -35,7 +35,10 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
   ));
 
   return (
-    <header style={{ position: "absolute", top: "0", left: "0", right: "0", zIndex: "5" }}>
+    <header
+      className="site-header"
+      style={{ position: "absolute", top: "0", left: "0", right: "0", zIndex: "5" }}
+    >
       <div
         style={{
           width: "100%",

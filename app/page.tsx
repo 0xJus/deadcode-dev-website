@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MotionToggle from "@/components/MotionToggle";
+import ScrollEffects from "@/components/ScrollEffects";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { steamUrl } from "@/lib/steam";
@@ -22,7 +23,6 @@ export default function HomePage() {
         fontSize: "18px",
         lineHeight: "1.45",
         color: "#e8e0d0",
-        background: "#0a0908",
         WebkitFontSmoothing: "antialiased",
       }}
     >
@@ -46,7 +46,6 @@ export default function HomePage() {
           style={{
             position: "relative",
             overflow: "hidden",
-            background: "#0a0908",
             minHeight: "820px",
             display: "flex",
             flexDirection: "column",
@@ -54,9 +53,11 @@ export default function HomePage() {
         >
           <div
             aria-hidden="true"
+            className="hero-art"
             style={{ position: "absolute", inset: "0", pointerEvents: "none" }}
           >
             <div
+              className="hero-arch"
               style={{
                 position: "absolute",
                 top: "0",
@@ -76,6 +77,7 @@ export default function HomePage() {
                 }}
               ></div>
               <div
+                data-parallax="0.6"
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -89,6 +91,7 @@ export default function HomePage() {
                 }}
               ></div>
               <div
+                data-parallax="1"
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -103,6 +106,8 @@ export default function HomePage() {
               ></div>
               <div
                 className="flicker"
+                data-parallax="1.4"
+                data-ember-source
                 style={{
                   position: "absolute",
                   left: "50%",
@@ -131,31 +136,9 @@ export default function HomePage() {
                 }}
               ></div>
             </div>
-            <div
-              style={{
-                position: "absolute",
-                inset: "0",
-                background:
-                  "linear-gradient(90deg,#0a0908 0%,rgba(10,9,8,.92) 32%,rgba(10,9,8,.3) 60%,rgba(10,9,8,0) 78%),linear-gradient(180deg,rgba(10,9,8,0) 72%,#0a0908 100%)",
-              }}
-            ></div>
-            <svg
-              width="100%"
-              height="100%"
-              style={{ position: "absolute", inset: "0", opacity: ".07", mixBlendMode: "overlay" }}
-            >
-              <filter id="grain-home-hero">
-                <feTurbulence
-                  type="fractalNoise"
-                  baseFrequency=".8"
-                  numOctaves="2"
-                  stitchTiles="stitch"
-                ></feTurbulence>
-              </filter>
-              <rect width="100%" height="100%" filter="url(#grain-home-hero)"></rect>
-            </svg>
           </div>
           <div
+            className="hero-body"
             style={{
               position: "relative",
               zIndex: "1",
@@ -163,7 +146,8 @@ export default function HomePage() {
               width: "100%",
               maxWidth: "1240px",
               margin: "0 auto",
-              padding: "clamp(150px,14vw,176px) clamp(16px,4vw,64px) 40px",
+              paddingInline: "clamp(16px,4vw,64px)",
+              paddingBottom: "40px",
               boxSizing: "border-box",
               display: "flex",
               flexDirection: "column",
@@ -382,7 +366,7 @@ export default function HomePage() {
         <section
           id="about"
           aria-labelledby="about-title"
-          style={{ position: "relative", background: "#0a0908", padding: "8px 0 176px" }}
+          style={{ position: "relative", zIndex: "2", padding: "8px 0 0" }}
         >
           <div
             style={{
@@ -530,21 +514,10 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <div style={{ position: "relative", zIndex: "2", marginTop: "-92px" }}>
-          <div
-            aria-hidden="true"
-            style={{
-              height: "28px",
-              marginBottom: "-1px",
-              background:
-                "repeating-linear-gradient(90deg,#D2CDB7 0,#D2CDB7 56px,transparent 56px,transparent 112px)",
-            }}
-          ></div>
+        <div style={{ position: "relative", zIndex: "2" }}>
           <div
             className="parch"
             style={{
-              background: "#D2CDB7",
-              color: "#121110",
               padding: "clamp(64px,7vw,104px) 0 clamp(80px,8vw,128px)",
             }}
           >
@@ -569,26 +542,26 @@ export default function HomePage() {
                   <h2 id="games-title" className="h2">
                     Games
                   </h2>
-                  <p className="lbl" style={{ color: "#4a443d" }}>
+                  <p className="lbl" style={{ color: "var(--ink-2)" }}>
                     1 game
                   </p>
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "24px" }}>
                   <Link
-                    className="card"
+                    className="card leaf"
                     href="/game"
                     style={{
                       flex: "2 1 560px",
                       minWidth: "0",
                       display: "flex",
                       flexDirection: "column",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
-                    <div style={{ overflow: "hidden", borderBottom: "3px solid #121110" }}>
+                    <div style={{ overflow: "hidden", borderBottom: "3px solid var(--ink)" }}>
                       <div
                         className="media"
                         style={{
@@ -638,7 +611,7 @@ export default function HomePage() {
                           <span className="tagd">[Genre]</span>
                         </div>
                       </div>
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         PC · Steam · itch.io
                       </p>
                       <p
@@ -652,7 +625,7 @@ export default function HomePage() {
                       >
                         [Two sentences: the hook first, then what you actually do in the game.]
                       </p>
-                      <span className="arrow" style={{ color: "#7a3612" }}>
+                      <span className="arrow" style={{ color: "var(--accent-ink)" }}>
                         See the game
                         <svg
                           width="18"
@@ -686,11 +659,11 @@ export default function HomePage() {
                         justifyContent: "space-between",
                         gap: "20px",
                         padding: "24px",
-                        border: "2px dashed #121110",
+                        border: "2px dashed var(--ink)",
                       }}
                     >
                       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                        <p className="lbl" style={{ color: "#4a443d" }}>
+                        <p className="lbl" style={{ color: "var(--ink-2)" }}>
                           Devlog
                         </p>
                         <h3
@@ -707,7 +680,7 @@ export default function HomePage() {
                         <p
                           style={{
                             margin: "0",
-                            color: "#4a443d",
+                            color: "var(--ink-2)",
                             fontSize: "18px",
                             lineHeight: "1.45",
                           }}
@@ -724,9 +697,9 @@ export default function HomePage() {
                           alignItems: "center",
                           minHeight: "48px",
                           padding: "0 22px",
-                          border: "2px solid #121110",
-                          background: "#121110",
-                          color: "#e8e0d0",
+                          border: "2px solid var(--ink)",
+                          background: "var(--ink)",
+                          color: "var(--paper)",
                           textDecoration: "none",
                           fontFamily: "'Grenze',Georgia,serif",
                           fontSize: "15px",
@@ -777,7 +750,7 @@ export default function HomePage() {
                     <div
                       style={{
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -799,7 +772,12 @@ export default function HomePage() {
                       [Feature 1 title]
                     </h3>
                     <p
-                      style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}
+                      style={{
+                        margin: "0",
+                        color: "var(--ink-2)",
+                        fontSize: "19px",
+                        lineHeight: "1.5",
+                      }}
                     >
                       [One line on what the player does and why it’s fun.]
                     </p>
@@ -808,7 +786,7 @@ export default function HomePage() {
                     <div
                       style={{
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -830,7 +808,12 @@ export default function HomePage() {
                       [Feature 2 title]
                     </h3>
                     <p
-                      style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}
+                      style={{
+                        margin: "0",
+                        color: "var(--ink-2)",
+                        fontSize: "19px",
+                        lineHeight: "1.5",
+                      }}
                     >
                       [One line on what the player does and why it’s fun.]
                     </p>
@@ -839,7 +822,7 @@ export default function HomePage() {
                     <div
                       style={{
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -861,7 +844,12 @@ export default function HomePage() {
                       [Feature 3 title]
                     </h3>
                     <p
-                      style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}
+                      style={{
+                        margin: "0",
+                        color: "var(--ink-2)",
+                        fontSize: "19px",
+                        lineHeight: "1.5",
+                      }}
                     >
                       [One line on what the player does and why it’s fun.]
                     </p>
@@ -973,7 +961,7 @@ export default function HomePage() {
                     <h2 id="devlog-title" className="h2">
                       Devlog
                     </h2>
-                    <p className="lbl" style={{ color: "#4a443d" }}>
+                    <p className="lbl" style={{ color: "var(--ink-2)" }}>
                       Latest post: [Date]
                     </p>
                   </div>
@@ -1001,18 +989,18 @@ export default function HomePage() {
                   }}
                 >
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
-                    <div style={{ overflow: "hidden", borderBottom: "3px solid #121110" }}>
+                    <div style={{ overflow: "hidden", borderBottom: "3px solid var(--ink)" }}>
                       <div
                         className="media"
                         style={{
@@ -1041,7 +1029,7 @@ export default function HomePage() {
                         </span>
                         <span className="tagd">Studio</span>
                       </div>
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         [Date]
                       </p>
                       <h3
@@ -1059,7 +1047,7 @@ export default function HomePage() {
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "18px",
                           lineHeight: "1.45",
                         }}
@@ -1069,18 +1057,18 @@ export default function HomePage() {
                     </div>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
-                    <div style={{ overflow: "hidden", borderBottom: "3px solid #121110" }}>
+                    <div style={{ overflow: "hidden", borderBottom: "3px solid var(--ink)" }}>
                       <div
                         className="media"
                         style={{
@@ -1107,7 +1095,7 @@ export default function HomePage() {
                         <span className="tagd">Kingdom of Kings</span>
                         <span className="tagd">Devlog</span>
                       </div>
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         [Date]
                       </p>
                       <h3
@@ -1125,7 +1113,7 @@ export default function HomePage() {
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "18px",
                           lineHeight: "1.45",
                         }}
@@ -1135,18 +1123,18 @@ export default function HomePage() {
                     </div>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
-                    <div style={{ overflow: "hidden", borderBottom: "3px solid #121110" }}>
+                    <div style={{ overflow: "hidden", borderBottom: "3px solid var(--ink)" }}>
                       <div
                         className="media"
                         style={{
@@ -1173,7 +1161,7 @@ export default function HomePage() {
                         <span className="tagd">Kingdom of Kings</span>
                         <span className="tagd">Devlog</span>
                       </div>
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         [Date]
                       </p>
                       <h3
@@ -1191,7 +1179,7 @@ export default function HomePage() {
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "18px",
                           lineHeight: "1.45",
                         }}
@@ -1212,7 +1200,12 @@ export default function HomePage() {
                     Community
                   </h2>
                   <p
-                    style={{ margin: "0", color: "#4a443d", fontSize: "18px", lineHeight: "1.45" }}
+                    style={{
+                      margin: "0",
+                      color: "var(--ink-2)",
+                      fontSize: "18px",
+                      lineHeight: "1.45",
+                    }}
                   >
                     Also on [only the socials you keep updated].
                   </p>
@@ -1225,16 +1218,16 @@ export default function HomePage() {
                   }}
                 >
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "14px",
                       padding: "28px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1265,7 +1258,7 @@ export default function HomePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
@@ -1273,7 +1266,10 @@ export default function HomePage() {
                       Talk with us while we build it. [What members get, e.g. devlog previews and
                       playtest invites.]
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Join the Discord
                       <svg
                         width="18"
@@ -1290,16 +1286,16 @@ export default function HomePage() {
                     </span>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "14px",
                       padding: "28px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1330,7 +1326,7 @@ export default function HomePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
@@ -1338,7 +1334,10 @@ export default function HomePage() {
                       Follow our Steam developer page and Steam will tell you when we release
                       something new.
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Follow us on Steam
                       <svg
                         width="18"
@@ -1366,8 +1365,8 @@ export default function HomePage() {
                   justifyContent: "space-between",
                   gap: "20px 40px",
                   padding: "32px 0",
-                  borderTop: "6px double #121110",
-                  borderBottom: "6px double #121110",
+                  borderTop: "6px double var(--ink)",
+                  borderBottom: "6px double var(--ink)",
                 }}
               >
                 <div
@@ -1392,7 +1391,14 @@ export default function HomePage() {
                   >
                     Make games with us
                   </h2>
-                  <p style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}>
+                  <p
+                    style={{
+                      margin: "0",
+                      color: "var(--ink-2)",
+                      fontSize: "19px",
+                      lineHeight: "1.5",
+                    }}
+                  >
                     [One line on how you work with collaborators, e.g. artists, composers and
                     playtesters on scoped projects.]
                   </p>
@@ -1406,9 +1412,9 @@ export default function HomePage() {
                     gap: "10px",
                     minHeight: "48px",
                     padding: "0 22px",
-                    border: "2px solid #121110",
-                    background: "#121110",
-                    color: "#e8e0d0",
+                    border: "2px solid var(--ink)",
+                    background: "var(--ink)",
+                    color: "var(--paper)",
                     textDecoration: "none",
                     fontFamily: "'Grenze',Georgia,serif",
                     fontSize: "15px",
@@ -1437,6 +1443,7 @@ export default function HomePage() {
         </div>
       </main>
       <SiteFooter idPrefix="home" emailId="nl-email" home />
+      <ScrollEffects />
     </div>
   );
 }
