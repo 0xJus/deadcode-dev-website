@@ -82,24 +82,7 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
           aria-label="Main"
           style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0 28px" }}
         >
-          <a className="nav-link" href="#games">
-            Games
-          </a>
-          <a className="nav-link" href="#devlog">
-            Devlog
-          </a>
-          <a className="nav-link" href="#">
-            Press
-          </a>
-          <a className="nav-link" href="#about">
-            About
-          </a>
-          <a className="nav-link" href="#collaborate">
-            Collaborate
-          </a>
-          <a className="nav-link" href="#">
-            Contact
-          </a>
+          {navLinks}
         </nav>
         <a
           className="cta"
