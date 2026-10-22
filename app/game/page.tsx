@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import MotionToggle from "@/components/MotionToggle";
+import ScrollEffects from "@/components/ScrollEffects";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { steamUrl } from "@/lib/steam";
@@ -22,7 +23,6 @@ export default function GamePage() {
         fontSize: "18px",
         lineHeight: "1.45",
         color: "#e8e0d0",
-        background: "#0a0908",
         WebkitFontSmoothing: "antialiased",
       }}
     >
@@ -46,7 +46,6 @@ export default function GamePage() {
           style={{
             position: "relative",
             overflow: "hidden",
-            background: "#0a0908",
             minHeight: "820px",
             display: "flex",
             flexDirection: "column",
@@ -54,6 +53,7 @@ export default function GamePage() {
         >
           <div
             aria-hidden="true"
+            className="hero-art"
             style={{ position: "absolute", inset: "0", pointerEvents: "none" }}
           >
             <div
@@ -71,6 +71,7 @@ export default function GamePage() {
               }}
             ></div>
             <div
+              data-parallax="0.6"
               style={{
                 position: "absolute",
                 left: "50%",
@@ -84,6 +85,7 @@ export default function GamePage() {
               }}
             ></div>
             <div
+              data-parallax="1"
               style={{
                 position: "absolute",
                 left: "50%",
@@ -98,6 +100,8 @@ export default function GamePage() {
             ></div>
             <div
               className="flicker"
+              data-parallax="1.4"
+              data-ember-source
               style={{
                 position: "absolute",
                 left: "50%",
@@ -125,23 +129,9 @@ export default function GamePage() {
                   "linear-gradient(90deg,rgba(224,123,46,0),rgba(224,123,46,.65),rgba(224,123,46,0))",
               }}
             ></div>
-            <svg
-              width="100%"
-              height="100%"
-              style={{ position: "absolute", inset: "0", opacity: ".07", mixBlendMode: "overlay" }}
-            >
-              <filter id="grain-game-hero">
-                <feTurbulence
-                  type="fractalNoise"
-                  baseFrequency=".8"
-                  numOctaves="2"
-                  stitchTiles="stitch"
-                ></feTurbulence>
-              </filter>
-              <rect width="100%" height="100%" filter="url(#grain-game-hero)"></rect>
-            </svg>
           </div>
           <div
+            className="hero-body"
             style={{
               position: "relative",
               zIndex: "1",
@@ -149,7 +139,8 @@ export default function GamePage() {
               width: "100%",
               maxWidth: "1240px",
               margin: "0 auto",
-              padding: "clamp(150px,14vw,168px) clamp(16px,4vw,64px) 40px",
+              paddingInline: "clamp(16px,4vw,64px)",
+              paddingBottom: "40px",
               boxSizing: "border-box",
               display: "flex",
               flexDirection: "column",
@@ -464,29 +455,11 @@ export default function GamePage() {
             </div>
           </div>
         </section>
-        <div
-          style={{
-            position: "relative",
-            zIndex: "2",
-            marginTop: "calc(-1 * clamp(96px,14vw,220px))",
-          }}
-        >
-          <div
-            aria-hidden="true"
-            style={{
-              height: "28px",
-              marginBottom: "-1px",
-              background:
-                "repeating-linear-gradient(90deg,#D2CDB7 0,#D2CDB7 56px,transparent 56px,transparent 112px)",
-            }}
-          ></div>
+        <div style={{ position: "relative", zIndex: "2" }}>
           <div
             className="parch"
             style={{
-              background: "#D2CDB7",
-              color: "#121110",
-              padding:
-                "calc(clamp(96px,14vw,220px) + clamp(48px,6vw,88px)) 0 clamp(80px,8vw,128px)",
+              padding: "clamp(72px,8vw,120px) 0 clamp(80px,8vw,128px)",
             }}
           >
             <div
@@ -520,7 +493,7 @@ export default function GamePage() {
                     gap: "24px",
                   }}
                 >
-                  <p className="lbl" style={{ color: "#4a443d" }}>
+                  <p className="lbl" style={{ color: "var(--ink-2)" }}>
                     About the game
                   </p>
                   <h2
@@ -561,7 +534,7 @@ export default function GamePage() {
                     style={{
                       margin: "8px 0 0",
                       paddingTop: "20px",
-                      borderTop: "6px double #121110",
+                      borderTop: "6px double var(--ink)",
                       maxWidth: "62ch",
                       display: "flex",
                       flexDirection: "column",
@@ -580,7 +553,7 @@ export default function GamePage() {
                     >
                       “A crown is a hat that lets the rain in.”
                     </blockquote>
-                    <figcaption className="lbl" style={{ color: "#4a443d" }}>
+                    <figcaption className="lbl" style={{ color: "var(--ink-2)" }}>
                       A saying from the game
                     </figcaption>
                   </figure>
@@ -594,7 +567,7 @@ export default function GamePage() {
                     flexDirection: "column",
                     gap: "20px",
                     padding: "28px",
-                    border: "3px solid #121110",
+                    border: "3px solid var(--ink)",
                   }}
                 >
                   <h2 id="facts-title" className="lbl">
@@ -652,9 +625,9 @@ export default function GamePage() {
                       gap: "10px",
                       minHeight: "52px",
                       padding: "0 22px",
-                      border: "2px solid #121110",
-                      background: "#121110",
-                      color: "#e8e0d0",
+                      border: "2px solid var(--ink)",
+                      background: "var(--ink)",
+                      color: "var(--paper)",
                       textDecoration: "none",
                       fontFamily: "'Grenze',Georgia,serif",
                       fontSize: "16px",
@@ -693,7 +666,7 @@ export default function GamePage() {
                         flex: "1 1 480px",
                         minWidth: "0",
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -712,14 +685,14 @@ export default function GamePage() {
                         gap: "14px",
                       }}
                     >
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         Feature 01
                       </p>
                       <h3 className="h3">[Feature title]</h3>
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "20px",
                           lineHeight: "1.55",
                         }}
@@ -742,7 +715,7 @@ export default function GamePage() {
                         flex: "1 1 480px",
                         minWidth: "0",
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -761,14 +734,14 @@ export default function GamePage() {
                         gap: "14px",
                       }}
                     >
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         Feature 02
                       </p>
                       <h3 className="h3">[Feature title]</h3>
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "20px",
                           lineHeight: "1.55",
                         }}
@@ -790,7 +763,7 @@ export default function GamePage() {
                         flex: "1 1 480px",
                         minWidth: "0",
                         aspectRatio: "16/9",
-                        border: "3px solid #121110",
+                        border: "3px solid var(--ink)",
                         background: "#1a1816",
                         display: "flex",
                         alignItems: "flex-end",
@@ -809,14 +782,14 @@ export default function GamePage() {
                         gap: "14px",
                       }}
                     >
-                      <p className="lbl" style={{ color: "#4a443d" }}>
+                      <p className="lbl" style={{ color: "var(--ink-2)" }}>
                         Feature 03
                       </p>
                       <h3 className="h3">[Feature title]</h3>
                       <p
                         style={{
                           margin: "0",
-                          color: "#4a443d",
+                          color: "var(--ink-2)",
                           fontSize: "20px",
                           lineHeight: "1.55",
                         }}
@@ -836,7 +809,7 @@ export default function GamePage() {
                   <h2 id="shots-title" className="h2">
                     Screenshots
                   </h2>
-                  <p className="lbl" style={{ color: "#4a443d" }}>
+                  <p className="lbl" style={{ color: "var(--ink-2)" }}>
                     In-game captures · 1920×1080
                   </p>
                 </div>
@@ -854,7 +827,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -875,7 +848,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -896,7 +869,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -917,7 +890,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -938,7 +911,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -959,7 +932,7 @@ export default function GamePage() {
                     style={{
                       aspectRatio: "16/9",
                       padding: "0",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       overflow: "hidden",
                       background: "#1a1816",
                       display: "flex",
@@ -984,7 +957,7 @@ export default function GamePage() {
                   justifyContent: "space-between",
                   gap: "24px 48px",
                   padding: "clamp(24px,3vw,40px)",
-                  border: "3px solid #121110",
+                  border: "3px solid var(--ink)",
                 }}
               >
                 <div
@@ -999,7 +972,14 @@ export default function GamePage() {
                   <h2 id="steam-title" className="h3">
                     Kingdom of Kings on Steam
                   </h2>
-                  <p style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}>
+                  <p
+                    style={{
+                      margin: "0",
+                      color: "var(--ink-2)",
+                      fontSize: "19px",
+                      lineHeight: "1.5",
+                    }}
+                  >
                     Steam’s own store widget, loaded only when you ask for it.
                   </p>
                 </div>
@@ -1013,7 +993,7 @@ export default function GamePage() {
                     justifyContent: "center",
                     padding: "20px",
                     boxSizing: "border-box",
-                    border: "2px dashed #121110",
+                    border: "2px dashed var(--ink)",
                   }}
                 >
                   <button
@@ -1024,9 +1004,9 @@ export default function GamePage() {
                       alignItems: "center",
                       minHeight: "48px",
                       padding: "0 22px",
-                      border: "2px solid #121110",
-                      background: "#121110",
-                      color: "#e8e0d0",
+                      border: "2px solid var(--ink)",
+                      background: "var(--ink)",
+                      color: "var(--paper)",
                       fontFamily: "'Grenze',Georgia,serif",
                       fontSize: "15px",
                       fontWeight: "700",
@@ -1073,7 +1053,7 @@ export default function GamePage() {
                     flexDirection: "column",
                   }}
                 >
-                  <li style={{ borderBottom: "2px solid #121110" }}>
+                  <li style={{ borderBottom: "2px solid var(--ink)" }}>
                     <a
                       className="row-link"
                       href="#"
@@ -1084,10 +1064,10 @@ export default function GamePage() {
                         gap: "8px 24px",
                         padding: "20px 0",
                         textDecoration: "none",
-                        color: "#121110",
+                        color: "var(--ink)",
                       }}
                     >
-                      <span className="lbl" style={{ flex: "0 0 130px", color: "#4a443d" }}>
+                      <span className="lbl" style={{ flex: "0 0 130px", color: "var(--ink-2)" }}>
                         [Date]
                       </span>
                       <span className="tagd">Devlog</span>
@@ -1117,7 +1097,7 @@ export default function GamePage() {
                       </svg>
                     </a>
                   </li>
-                  <li style={{ borderBottom: "2px solid #121110" }}>
+                  <li style={{ borderBottom: "2px solid var(--ink)" }}>
                     <a
                       className="row-link"
                       href="#"
@@ -1128,10 +1108,10 @@ export default function GamePage() {
                         gap: "8px 24px",
                         padding: "20px 0",
                         textDecoration: "none",
-                        color: "#121110",
+                        color: "var(--ink)",
                       }}
                     >
-                      <span className="lbl" style={{ flex: "0 0 130px", color: "#4a443d" }}>
+                      <span className="lbl" style={{ flex: "0 0 130px", color: "var(--ink-2)" }}>
                         [Date]
                       </span>
                       <span className="tagd">Devlog</span>
@@ -1161,7 +1141,7 @@ export default function GamePage() {
                       </svg>
                     </a>
                   </li>
-                  <li style={{ borderBottom: "2px solid #121110" }}>
+                  <li style={{ borderBottom: "2px solid var(--ink)" }}>
                     <a
                       className="row-link"
                       href="#"
@@ -1172,10 +1152,10 @@ export default function GamePage() {
                         gap: "8px 24px",
                         padding: "20px 0",
                         textDecoration: "none",
-                        color: "#121110",
+                        color: "var(--ink)",
                       }}
                     >
-                      <span className="lbl" style={{ flex: "0 0 130px", color: "#4a443d" }}>
+                      <span className="lbl" style={{ flex: "0 0 130px", color: "var(--ink-2)" }}>
                         [Date]
                       </span>
                       <span className="tagd">Announcement</span>
@@ -1228,7 +1208,14 @@ export default function GamePage() {
                   <h2 id="faq-title" className="h2">
                     FAQ
                   </h2>
-                  <p style={{ margin: "0", color: "#4a443d", fontSize: "19px", lineHeight: "1.5" }}>
+                  <p
+                    style={{
+                      margin: "0",
+                      color: "var(--ink-2)",
+                      fontSize: "19px",
+                      lineHeight: "1.5",
+                    }}
+                  >
                     Not answered here? Ask in Discord or email <a href="#">[hello@yourdomain]</a>.
                   </p>
                 </div>
@@ -1238,10 +1225,10 @@ export default function GamePage() {
                     minWidth: "0",
                     display: "flex",
                     flexDirection: "column",
-                    borderTop: "2px solid #121110",
+                    borderTop: "2px solid var(--ink)",
                   }}
                 >
-                  <details open style={{ borderBottom: "2px solid #121110" }}>
+                  <details open style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1277,7 +1264,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1286,7 +1273,7 @@ export default function GamePage() {
                       launches.
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1322,7 +1309,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1330,7 +1317,7 @@ export default function GamePage() {
                       PC (Windows), on Steam and itch.io. [Any other platforms you’re planning.]
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1366,7 +1353,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1374,7 +1361,7 @@ export default function GamePage() {
                       [Price, or “We’ll announce the price closer to launch.”]
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1410,7 +1397,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1418,7 +1405,7 @@ export default function GamePage() {
                       [Player count, online or local, and how servers are hosted.]
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1454,7 +1441,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1462,7 +1449,7 @@ export default function GamePage() {
                       [Your Steam Deck plans.]
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1498,7 +1485,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1506,7 +1493,7 @@ export default function GamePage() {
                       [Languages at launch, and any planned later.]
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1542,7 +1529,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1551,7 +1538,7 @@ export default function GamePage() {
                       <a href="#">Read the creator policy</a>.
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1587,7 +1574,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1596,7 +1583,7 @@ export default function GamePage() {
                       <a href="#">Kingdom of Kings rules wiki</a>.
                     </p>
                   </details>
-                  <details style={{ borderBottom: "2px solid #121110" }}>
+                  <details style={{ borderBottom: "2px solid var(--ink)" }}>
                     <summary
                       style={{
                         display: "flex",
@@ -1632,7 +1619,7 @@ export default function GamePage() {
                       style={{
                         margin: "0 0 24px",
                         maxWidth: "62ch",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "19px",
                         lineHeight: "1.55",
                       }}
@@ -1660,16 +1647,16 @@ export default function GamePage() {
                   }}
                 >
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "12px",
                       padding: "24px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1700,28 +1687,31 @@ export default function GamePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
                     >
                       Talk with us and other players.
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Join the Discord
                     </span>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "12px",
                       padding: "24px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1753,28 +1743,31 @@ export default function GamePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
                     >
                       Discussions, guides and screenshots.
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Open the hub
                     </span>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "12px",
                       padding: "24px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1804,28 +1797,31 @@ export default function GamePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
                     >
                       The full rules, kept up to date.
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Read the rules
                     </span>
                   </a>
                   <a
-                    className="card"
+                    className="card leaf"
                     href="#"
                     style={{
                       display: "flex",
                       flexDirection: "column",
                       gap: "12px",
                       padding: "24px",
-                      border: "3px solid #121110",
+                      border: "3px solid var(--ink)",
                       textDecoration: "none",
-                      color: "#121110",
+                      color: "var(--ink)",
                     }}
                   >
                     <svg
@@ -1856,14 +1852,17 @@ export default function GamePage() {
                     <p
                       style={{
                         margin: "0",
-                        color: "#4a443d",
+                        color: "var(--ink-2)",
                         fontSize: "18px",
                         lineHeight: "1.45",
                       }}
                     >
                       Get notified when we release something new.
                     </p>
-                    <span className="arrow" style={{ marginTop: "auto", color: "#7a3612" }}>
+                    <span
+                      className="arrow"
+                      style={{ marginTop: "auto", color: "var(--accent-ink)" }}
+                    >
                       Follow the studio
                     </span>
                   </a>
@@ -1966,7 +1965,7 @@ export default function GamePage() {
                         alignItems: "center",
                         minHeight: "48px",
                         padding: "0 22px",
-                        border: "2px solid #6b6258",
+                        border: "2px solid var(--line)",
                         color: "#e8e0d0",
                         textDecoration: "none",
                         fontFamily: "'Grenze',Georgia,serif",
@@ -1988,7 +1987,7 @@ export default function GamePage() {
                     flexDirection: "column",
                     gap: "16px",
                     padding: "clamp(24px,3vw,40px)",
-                    border: "3px solid #121110",
+                    border: "3px solid var(--ink)",
                   }}
                 >
                   <h2 className="h3">Credits</h2>
@@ -2001,12 +2000,12 @@ export default function GamePage() {
                           fontWeight: "700",
                           letterSpacing: "0",
                           textTransform: "none",
-                          color: "#121110",
+                          color: "var(--ink)",
                         }}
                       >
                         [Name]
                       </dt>
-                      <dd style={{ color: "#4a443d" }}>[Role, e.g. design and code]</dd>
+                      <dd style={{ color: "var(--ink-2)" }}>[Role, e.g. design and code]</dd>
                     </div>
                     <div className="dl-row" style={{ flexWrap: "wrap" }}>
                       <dt
@@ -2016,12 +2015,12 @@ export default function GamePage() {
                           fontWeight: "700",
                           letterSpacing: "0",
                           textTransform: "none",
-                          color: "#121110",
+                          color: "var(--ink)",
                         }}
                       >
                         [Name]
                       </dt>
-                      <dd style={{ color: "#4a443d" }}>[Role, e.g. art and UI]</dd>
+                      <dd style={{ color: "var(--ink-2)" }}>[Role, e.g. art and UI]</dd>
                     </div>
                     <div className="dl-row" style={{ flexWrap: "wrap" }}>
                       <dt
@@ -2031,12 +2030,12 @@ export default function GamePage() {
                           fontWeight: "700",
                           letterSpacing: "0",
                           textTransform: "none",
-                          color: "#121110",
+                          color: "var(--ink)",
                         }}
                       >
                         [Name]
                       </dt>
-                      <dd style={{ color: "#4a443d" }}>[Role, e.g. audio and music]</dd>
+                      <dd style={{ color: "var(--ink-2)" }}>[Role, e.g. audio and music]</dd>
                     </div>
                     <div className="dl-row" style={{ flexWrap: "wrap" }}>
                       <dt
@@ -2046,15 +2045,15 @@ export default function GamePage() {
                           fontWeight: "700",
                           letterSpacing: "0",
                           textTransform: "none",
-                          color: "#121110",
+                          color: "var(--ink)",
                         }}
                       >
                         [Contractor name]
                       </dt>
-                      <dd style={{ color: "#4a443d" }}>[Role]</dd>
+                      <dd style={{ color: "var(--ink-2)" }}>[Role]</dd>
                     </div>
                   </dl>
-                  <p className="lbl" style={{ color: "#4a443d" }}>
+                  <p className="lbl" style={{ color: "var(--ink-2)" }}>
                     Made with Unity
                   </p>
                 </div>
@@ -2068,6 +2067,7 @@ export default function GamePage() {
         emailId="nl-email-game"
         heading="Kingdom of Kings updates by email"
       />
+      <ScrollEffects />
     </div>
   );
 }

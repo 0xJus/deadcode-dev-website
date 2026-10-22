@@ -2,16 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-/** Pauses or resumes the ember flicker animation and the smooth scroll on in-page links (see globals.css). */
+/**
+ * Pauses or resumes all motion: the ember flicker, the drifting fog and rising embers, the scroll
+ * fade-ins and parallax, and the smooth scroll on in-page links. Each of them watches the
+ * "paused" class on the body (see globals.css and lib/motion.ts). The class stays on the body when
+ * moving between pages, so the choice carries over.
+ */
 export default function MotionToggle() {
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    document.body.classList.toggle("paused", paused);
-    return () => document.body.classList.remove("paused");
-  }, [paused]);
+    setPaused(document.body.classList.contains("paused"));
+  }, []);
 
-  const toggleMotion = () => setPaused((p) => !p);
+  const toggleMotion = () => {
+    const next = !paused;
+    document.body.classList.toggle("paused", next);
+    setPaused(next);
+  };
 
   return (
     <button
